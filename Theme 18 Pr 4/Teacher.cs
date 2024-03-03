@@ -6,32 +6,103 @@ using System.Threading.Tasks;
 
 namespace Theme_18_Pr_4
 {
-    public class Teacher : Person
-    {
-        //Инициализировал свойства
-        public string Faculty { get { return Faculty; } set { Faculty = value; } }
-        public string Position { get { return Position; } set { Position = value; } }
-        public int Experience { get { return Experience; } set { Experience = value; } }
+    internal class Teacher : Person
+    {/// <summary>
+     /// поле описывающее стаж
+     /// </summary>
+        int experience;
+        /// <summary>
+        /// поле описывающее должность
+        /// </summary>
+        string position;
+        /// <summary>
+        /// свойство для полей
+        /// </summary>
 
-        public Teacher(string Name, string Surname, DateTime Datebirthday, string faculty, string position, int experience)
-            : base(Name, Surname, Datebirthday)
+        public int Experience { get => experience; set => experience = value; }
+        public string Position { get => position; set => position = value; }
+        /// <summary>
+        /// конструктор по умолчанию 
+        /// </summary>
+        public Teacher() { }
+        /// <summary>
+        /// конструктор с параметрами 
+        /// </summary>
+        /// <param name="name">name</param>
+        /// <param name="surname">surname</param>
+        /// <param name="dateB">dateB</param>
+        /// <param name="faculty">faculty</param>
+        /// <param name="experience">experience</param>
+        /// <param name="position">position</param>
+
+        public Teacher(string name, string surname, DateTime dateB, string faculty, int experience, string position) : base(name, surname, dateB)
         {
-            Faculty = faculty;
-            Position = position;
             Experience = experience;
+            Position = position;
         }
-        //Метод для вычисления возраста
-        public override int GetAge()
+        /// <summary>
+        /// иетод для определения возраста 
+        /// </summary>
+        /// <returns></returns>
+        public override int Age()
         {
-            return (DateTime.Now - Datebirthday).Days / 365;
+
+            DateTime dateNow = DateTime.Now;
+            if (dateNow.Month < DateB.Month)
+            {
+                return dateNow.Year - DateB.Year - 1;
+            }
+            else if (dateNow.Month == DateB.Day)
+            {
+
+                if (dateNow.Day < DateB.Day)
+                {
+
+                    return dateNow.Year - DateB.Year - 1;
+
+                }
+                else
+                {
+                    return dateNow.Year - DateB.Year;
+                }
+            }
+            else
+            {
+                return dateNow.Year - DateB.Year;
+            }
+
         }
-        //Метод вывода
-        public void ShowInfo()
+        /// <summary>
+        /// метод для вывода информации об объекте 
+        /// </summary>
+        /// <returns></returns>
+        public static Teacher Init()
         {
-            base.PrintInfo();
-            Console.WriteLine($"Факультет: {Faculty}");
-            Console.WriteLine($"Должность: {Position}");
-            Console.WriteLine($"Стаж: {Experience} лет");
+            try
+            {
+                Console.Write("Имя:");
+                string name = Console.ReadLine();
+                Console.Write("Фамилия:");
+                string surname = Console.ReadLine();
+                Console.Write("Дата рождения:");
+                DateTime dateB = DateTime.Parse(Console.ReadLine());
+                Console.Write("Факультет:");
+                string faculty = Console.ReadLine();
+                Console.Write("Должность:");
+                string position = Console.ReadLine();
+                Console.Write("Стаж:");
+                int experience = int.Parse(Console.ReadLine());
+                return new Teacher(name, surname, dateB, faculty, experience, position);
+            }
+            catch { return Init(); }
+        }/// <summary>
+         /// иетод для вывода инфлормации
+         /// </summary>
+
+        public override void Print()
+        {
+            base.Print();
+            Console.WriteLine($"Стаж:{experience}\nДолжность:{position}");
         }
     }
 }

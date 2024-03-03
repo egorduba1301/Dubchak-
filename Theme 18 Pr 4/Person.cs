@@ -6,46 +6,51 @@ using System.Threading.Tasks;
 
 namespace Theme_18_Pr_4
 {
-    public abstract class Person
-    {
-        //Инициализировал свойства
-        public string Name
-        {
-            get { return Name; }
-            set { Name = value; }
-        }
-        public string Surname
-        {
-            get { return Surname; }
-            set { Surname = value; }
-        }
-        public DateTime Datebirthday
-        {
-            get { return Datebirthday; }
-            set { Datebirthday = value; }
-        }
-        
-        public string Faculty
-        {
-            get { return Faculty; }
-            set { Faculty = value; }
-        }
-
-        //Коснструктор с параметрами
-        public Person(string name, string surname, DateTime datebirthday)
+    abstract internal class Person
+    {/// <summary>
+     /// поле поисывающее фамилию ,имя 
+     /// </summary>
+        string name, surname;
+        /// <summary>
+        /// поле описывающее дату рождения
+        /// </summary>
+        DateTime dateB;
+        /// <summary>
+        /// конструктор с параметрами 
+        /// </summary>
+        /// <param name="name">name</param>
+        /// <param name="surname">surname</param>
+        /// <param name="dateB">data</param>
+        public Person(string name, string surname, DateTime dateB)
         {
             Name = name;
             Surname = surname;
-            Datebirthday = datebirthday;
+            DateB = dateB;
         }
-        //Абстрактный метод
-        public abstract int GetAge();
-        //Метод вывода
-        public void PrintInfo()
-        {
-            Console.WriteLine($"{Name} {Surname}, {GetAge()} лет");
-        }
-    }
-}      
-    
+        /// <summary>
+        /// конструктор по умолчанию
+        /// </summary>
+        public Person() { }
+        /// <summary>
+        /// свойтво для полей имя , фаимлия и дата родения
+        /// </summary>
+        public string Name { get => name; set => name = value; }
+        public string Surname { get => surname; set => surname = value; }
+        public DateTime DateB { get => dateB; set => dateB = value; }
+        /// <summary>
+        /// метод Age для определения возраста 
+        /// </summary>
+        /// <returns></returns>
 
+        public abstract int Age();
+        /// <summary>
+        /// метод для вывода информации
+        /// </summary>
+        public virtual void Print()
+        {
+            Console.WriteLine($"Имя:{Name}\tФамилия:{Surname}\tДата:{DateB}");
+        }
+
+
+    }
+}

@@ -6,33 +6,33 @@ using System.Threading.Tasks;
 
 namespace Theme_18_Pr_4
 {
-    internal class Student : Person
-    {/// <summary>
-     /// поле описывающее курс
-     /// </summary>
-        int curs;
+    internal class Enrollee : Person
+    {
         /// <summary>
-        /// конструктор по умолчанию
+        /// поле поисвающее факультет
         /// </summary>
-        public Student() { }
+        string faculty;
         /// <summary>
-        /// свойство для поля сурс
+        /// свойсво для поля факулитет
         /// </summary>
-        public int Curs { get => curs; set => curs = value; }
+        public string Faculty { get => faculty; set => faculty = value; }
         /// <summary>
-        /// конструктор с параметрами
+        /// конструкто по умолчанию
+        /// </summary>
+        public Enrollee() { }
+        /// <summary>
+        /// конструктор с параметрами 
         /// </summary>
         /// <param name="name">name</param>
         /// <param name="surname">surname</param>
-        /// <param name="dateB"></param>
-        /// <param name="faculty">faculty</param>
-        /// <param name="curs">curs</param>
-        public Student(string name, string surname, DateTime dateB, string faculty, int curs) : base(name, surname, dateB)
+        /// <param name="dateB">dateB</param>
+        /// <param name="faculty">faculry</param>
+        public Enrollee(string name, string surname, DateTime dateB, string faculty) : base(name, surname, dateB)
         {
-            Curs = curs;
+            Faculty = faculty;
         }
         /// <summary>
-        /// метод для определения возраста 
+        /// метод Age для определения возраста
         /// </summary>
         /// <returns></returns>
         public override int Age()
@@ -63,10 +63,10 @@ namespace Theme_18_Pr_4
 
         }
         /// <summary>
-        /// иетод для вывода информации  об объекте 
+        /// метод для вывода информации об объекте 
         /// </summary>
         /// <returns></returns>
-        public static Student Init()
+        public static Enrollee Init()
         {
             try
             {
@@ -78,20 +78,17 @@ namespace Theme_18_Pr_4
                 DateTime dateB = DateTime.Parse(Console.ReadLine());
                 Console.Write("Факультет:");
                 string facult = Console.ReadLine();
-                Console.Write("Курс:");
-                int kurs = int.Parse(Console.ReadLine());
-                return new Student(name, surname, dateB, facult, kurs);
+                return new Enrollee(name, surname, dateB, facult);
             }
             catch { return Init(); }
         }
         /// <summary>
         /// метод для вывода информации
         /// </summary>
-
         public override void Print()
         {
             base.Print();
-            Console.WriteLine($"Курс:{curs}");
+            Console.WriteLine($"Факультет:{faculty}");
         }
     }
 }
